@@ -40,7 +40,7 @@ describe("StreamPlayerAPI", () => {
         );
     });
 
-    it("reponds with transformed message", async () => {
+    it("reponds with transformed message.", async () => {
         const response = await getNowPlaying(ChannelName.RADIO2);
         expect(gotSpy).toHaveBeenCalledWith(
             "https://www.nporadio2.nl/api/tracks"
