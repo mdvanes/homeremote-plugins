@@ -45,7 +45,7 @@ var ChannelName;
 })(ChannelName = exports.ChannelName || (exports.ChannelName = {}));
 // Export for use by other apps
 exports.getNowPlaying = function (channelName) { return __awaiter(void 0, void 0, void 0, function () {
-    var nowonairResponse, _a, artist, title, image, enddatetime, broadcastResponse, _b, name_1, presenters, image_url, presentersSuffix, nowonairResponse, _c, artist, title, image, enddatetime, broadcastResponse, _d, name_2, presenters, image_url, presentersSuffix;
+    var nowonairResponse, _a, artist, title, songImg, enddatetime, broadcastResponse, _b, name_1, presenters, presenterImg, presentersSuffix, nowonairResponse, _c, artist, title, songImg, enddatetime, broadcastResponse, _d, name_2, presenters, presenterImg, presentersSuffix;
     return __generator(this, function (_e) {
         switch (_e.label) {
             case 0:
@@ -53,38 +53,38 @@ exports.getNowPlaying = function (channelName) { return __awaiter(void 0, void 0
                 return [4 /*yield*/, got_1["default"]("https://www.nporadio2.nl/api/tracks").json()];
             case 1:
                 nowonairResponse = _e.sent();
-                _a = nowonairResponse.data[0], artist = _a.artist, title = _a.title, image = _a.image, enddatetime = _a.enddatetime;
+                _a = nowonairResponse.data[0], artist = _a.artist, title = _a.title, songImg = _a.image_url_400x400, enddatetime = _a.enddatetime;
                 return [4 /*yield*/, got_1["default"]("https://www.nporadio2.nl/api/broadcasts").json()];
             case 2:
                 broadcastResponse = _e.sent();
-                _b = broadcastResponse.data[0], name_1 = _b.title, presenters = _b.presenters, image_url = _b.image_url;
+                _b = broadcastResponse.data[0], name_1 = _b.title, presenters = _b.presenters, presenterImg = _b.image_url_400x400;
                 presentersSuffix = presenters ? " / " + presenters : "";
                 return [2 /*return*/, {
                         artist: artist,
                         title: title,
                         last_updated: enddatetime,
-                        songImageUrl: image !== null && image !== void 0 ? image : "",
+                        songImageUrl: songImg !== null && songImg !== void 0 ? songImg : "",
                         name: "" + name_1 + presentersSuffix,
-                        imageUrl: image_url !== null && image_url !== void 0 ? image_url : ""
+                        imageUrl: presenterImg !== null && presenterImg !== void 0 ? presenterImg : ""
                     }];
             case 3:
                 if (!(channelName === ChannelName.RADIO3)) return [3 /*break*/, 6];
                 return [4 /*yield*/, got_1["default"]("https://www.npo3fm.nl/api/tracks").json()];
             case 4:
                 nowonairResponse = _e.sent();
-                _c = nowonairResponse.data[0], artist = _c.artist, title = _c.title, image = _c.image, enddatetime = _c.enddatetime;
+                _c = nowonairResponse.data[0], artist = _c.artist, title = _c.title, songImg = _c.image_url_400x400, enddatetime = _c.enddatetime;
                 return [4 /*yield*/, got_1["default"]("https://www.npo3fm.nl/api/broadcasts").json()];
             case 5:
                 broadcastResponse = _e.sent();
-                _d = broadcastResponse.data[0], name_2 = _d.title, presenters = _d.presenters, image_url = _d.image_url;
+                _d = broadcastResponse.data[0], name_2 = _d.title, presenters = _d.presenters, presenterImg = _d.image_url_400x400;
                 presentersSuffix = presenters ? " / " + presenters : "";
                 return [2 /*return*/, {
                         artist: artist,
                         title: title,
                         last_updated: enddatetime,
-                        songImageUrl: image !== null && image !== void 0 ? image : "",
+                        songImageUrl: songImg !== null && songImg !== void 0 ? songImg : "",
                         name: "" + name_2 + presentersSuffix,
-                        imageUrl: image_url !== null && image_url !== void 0 ? image_url : ""
+                        imageUrl: presenterImg !== null && presenterImg !== void 0 ? presenterImg : ""
                     }];
             case 6: return [2 /*return*/];
         }

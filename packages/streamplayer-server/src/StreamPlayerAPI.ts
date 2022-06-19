@@ -16,12 +16,17 @@ export enum ChannelName {
 
 interface TracksResponse {
     data: [
-        { artist: string; title: string; image?: string; enddatetime: string }
+        {
+            artist: string;
+            title: string;
+            image_url_400x400?: string;
+            enddatetime: string;
+        }
     ];
 }
 
 interface BroadcastResponse {
-    data: [{ title: string; presenters?: string; image_url?: string }];
+    data: [{ title: string; presenters?: string; image_url_400x400?: string }];
 }
 
 // Export for use by other apps
@@ -32,46 +37,56 @@ export const getNowPlaying = async (
         const nowonairResponse = await got(
             "https://www.nporadio2.nl/api/tracks"
         ).json<TracksResponse>();
-        const { artist, title, image, enddatetime } = nowonairResponse.data[0];
+        const {
+            artist,
+            title,
+            image_url_400x400: songImg,
+            enddatetime,
+        } = nowonairResponse.data[0];
         const broadcastResponse = await got(
             "https://www.nporadio2.nl/api/broadcasts"
         ).json<BroadcastResponse>();
         const {
             title: name,
             presenters,
-            image_url,
+            image_url_400x400: presenterImg,
         } = broadcastResponse.data[0];
         const presentersSuffix = presenters ? ` / ${presenters}` : "";
         return {
             artist,
             title,
             last_updated: enddatetime,
-            songImageUrl: image ?? "",
+            songImageUrl: songImg ?? "",
             name: `${name}${presentersSuffix}`,
-            imageUrl: image_url ?? "",
+            imageUrl: presenterImg ?? "",
         };
     }
     if (channelName === ChannelName.RADIO3) {
         const nowonairResponse = await got(
             "https://www.npo3fm.nl/api/tracks"
         ).json<TracksResponse>();
-        const { artist, title, image, enddatetime } = nowonairResponse.data[0];
+        const {
+            artist,
+            title,
+            image_url_400x400: songImg,
+            enddatetime,
+        } = nowonairResponse.data[0];
         const broadcastResponse = await got(
             "https://www.npo3fm.nl/api/broadcasts"
         ).json<BroadcastResponse>();
         const {
             title: name,
             presenters,
-            image_url,
+            image_url_400x400: presenterImg,
         } = broadcastResponse.data[0];
         const presentersSuffix = presenters ? ` / ${presenters}` : "";
         return {
             artist,
             title,
             last_updated: enddatetime,
-            songImageUrl: image ?? "",
+            songImageUrl: songImg ?? "",
             name: `${name}${presentersSuffix}`,
-            imageUrl: image_url ?? "",
+            imageUrl: presenterImg ?? "",
         };
     }
 };

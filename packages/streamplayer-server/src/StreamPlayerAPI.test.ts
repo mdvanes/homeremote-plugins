@@ -35,7 +35,7 @@ describe("StreamPlayerAPI", () => {
         gotSpy.mockReturnValue(
             createMockRequest({
                 presenters: SomePresenters,
-                image: SomeImageUrl,
+                image_url_400x400: SomeImageUrl,
             })
         );
     });
@@ -51,7 +51,7 @@ describe("StreamPlayerAPI", () => {
             last_updated: SomeEndDateTime,
             songImageUrl: SomeImageUrl,
             name: `${SomeTitle} / ${SomePresenters}`,
-            imageUrl: "",
+            imageUrl: SomeImageUrl,
         });
     });
 
