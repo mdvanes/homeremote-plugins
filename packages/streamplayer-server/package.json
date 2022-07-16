@@ -3,7 +3,8 @@
   "version": "1.8.4",
   "dependencies": {
     "express": "^4.17.1",
-    "got": "^11.8.0"
+    "got": "^11.8.0",
+    "icy": "^2.1.0"
   },
   "repository": {
     "type": "git",
