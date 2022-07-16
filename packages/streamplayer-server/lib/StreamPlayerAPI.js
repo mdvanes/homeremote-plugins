@@ -49,8 +49,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 exports.__esModule = true;
 exports.getNowPlaying = exports.ChannelName = void 0;
 var got_1 = require("got");
-// Must use require or will break on build, because of ICY export method
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 var icy = require("icy");
 var ChannelName;
 (function (ChannelName) {

@@ -8,13 +8,17 @@ interface Parsed {
 }
 
 declare module "icy" {
-    const get = (
+    export const get = (
         url: string,
         callback: (response: Response) => void
     ): string => {
         /* */
     };
-    const parse = (input: string): Parsed => {
+    export const parse = (input: string): Parsed => {
         /* */
     };
+
+    const fakeDefault = {};
+
+    export default fakeDefault;
 }

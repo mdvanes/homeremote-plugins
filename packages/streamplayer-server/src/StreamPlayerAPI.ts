@@ -1,10 +1,5 @@
 import got from "got";
-// Only for types!
-import { get as IcyGet, parse as IcyParse } from "icy";
-
-// Must use require or will break on build, because of ICY export method
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const icy = require("icy");
+import * as icy from "icy";
 
 export interface NowPlayingResponse {
     artist: string;
@@ -39,7 +34,7 @@ interface BroadcastResponse {
 
 const getMetadata = (name: string, url: string) =>
     new Promise<NowPlayingResponse>((resolve) => {
-        (icy.get as typeof IcyGet)(url, function (res) {
+        icy.get(url, function (res) {
             const getStaticData = () => {
                 const now = Date.now();
                 const imageName = name.replace(/\s/g, "-").toLowerCase();
@@ -52,7 +47,7 @@ const getMetadata = (name: string, url: string) =>
             };
 
             res.on("metadata", function (metadata) {
-                const parsed = (icy.parse as typeof IcyParse)(metadata);
+                const parsed = icy.parse(metadata);
                 const [artist, title] = parsed.StreamTitle.split(" - ");
 
                 const staticData = getStaticData();
