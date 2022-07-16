@@ -95,6 +95,30 @@ const startServer = (corsMode: CORS_MODE): void => {
         }
     });
 
+    app.get("/api/nowplaying/sky", async (req, res) => {
+        logRequest(req);
+        setCorsHeaders(corsMode, res);
+        try {
+            const response = await getNowPlaying(ChannelName.SKY);
+            res.send(response);
+        } catch (error) {
+            console.log(error);
+            res.sendStatus(500);
+        }
+    });
+
+    app.get("/api/nowplaying/pinguin", async (req, res) => {
+        logRequest(req);
+        setCorsHeaders(corsMode, res);
+        try {
+            const response = await getNowPlaying(ChannelName.PINGUIN);
+            res.send(response);
+        } catch (error) {
+            console.log(error);
+            res.sendStatus(500);
+        }
+    });
+
     app.get("/api/dockerlist", async (req, res) => {
         logRequest(req);
         setCorsHeaders(corsMode, res);

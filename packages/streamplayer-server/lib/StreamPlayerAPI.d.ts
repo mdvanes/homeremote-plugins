@@ -8,6 +8,8 @@ export interface NowPlayingResponse {
 }
 export declare enum ChannelName {
     RADIO2 = 0,
-    RADIO3 = 1
+    RADIO3 = 1,
+    SKY = 2,
+    PINGUIN = 3
 }
 export declare const getNowPlaying: (channelName: ChannelName) => Promise<NowPlayingResponse | undefined>;

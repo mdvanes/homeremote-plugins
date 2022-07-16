@@ -23,5 +23,14 @@
         "noEmit": false
     },
     "include": ["packages"],
-    "exclude": ["node_modules", "packages/**/*.test.ts", "packages/**/*.test.tsx", "packages/**/*.stories.tsx", "packages/**/*.gen.tsx"]
+    "exclude": [
+        "node_modules",
+        "packages/**/*.test.ts",
+        "packages/**/*.test.tsx",
+        "packages/**/*.stories.tsx",
+        "packages/**/*.gen.tsx"
+    ],
+    "ts-node": {
+        "files": true
+    }
 }

@@ -1,4 +1,5 @@
 import got from "got";
+import icy from "icy";
 
 export interface NowPlayingResponse {
     artist: string;
@@ -12,6 +13,8 @@ export interface NowPlayingResponse {
 export enum ChannelName {
     RADIO2,
     RADIO3,
+    SKY,
+    PINGUIN,
 }
 
 interface TracksResponse {
@@ -28,6 +31,45 @@ interface TracksResponse {
 interface BroadcastResponse {
     data: [{ title: string; presenters?: string; image_url_400x400?: string }];
 }
+
+const getMetadata = (name: string, url: string) =>
+    new Promise<NowPlayingResponse>((resolve) => {
+        icy.get(url, function (res) {
+            const getStaticData = () => {
+                const now = Date.now();
+                const imageName = name.replace(/\s/g, "-").toLowerCase();
+                return {
+                    name,
+                    imageUrl: `/metadata/${imageName}.jpg`,
+                    songImageUrl: "",
+                    last_updated: now.toString(),
+                };
+            };
+
+            res.on("metadata", function (metadata) {
+                const parsed = icy.parse(metadata);
+                const [artist, title] = parsed.StreamTitle.split(" - ");
+
+                const staticData = getStaticData();
+
+                resolve({
+                    ...staticData,
+                    title,
+                    artist,
+                });
+            });
+
+            // Return some values when no metadata within interval
+            setTimeout(() => {
+                const staticData = getStaticData();
+                resolve({
+                    ...staticData,
+                    title: "[timeout]",
+                    artist: "[timeout]",
+                });
+            }, 1000);
+        });
+    });
 
 // Export for use by other apps
 export const getNowPlaying = async (
@@ -88,5 +130,17 @@ export const getNowPlaying = async (
             name: `${name}${presentersSuffix}`,
             imageUrl: presenterImg ?? "",
         };
+    }
+    if (channelName === ChannelName.SKY) {
+        return getMetadata(
+            "Sky Radio",
+            "https://19993.live.streamtheworld.com/SKYRADIO.mp3"
+        );
+    }
+    if (channelName === ChannelName.PINGUIN) {
+        return getMetadata(
+            "Pinguin Radio",
+            "https://streams.pinguinradio.com/PinguinRadio320.mp3"
+        );
     }
 };
