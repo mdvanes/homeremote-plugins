@@ -1,5 +1,10 @@
 import got from "got";
-import icy from "icy";
+// Only for types!
+import { get as IcyGet, parse as IcyParse } from "icy";
+
+// Must use require or will break on build, because of ICY export method
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const icy = require("icy");
 
 export interface NowPlayingResponse {
     artist: string;
@@ -34,7 +39,7 @@ interface BroadcastResponse {
 
 const getMetadata = (name: string, url: string) =>
     new Promise<NowPlayingResponse>((resolve) => {
-        icy.get(url, function (res) {
+        (icy.get as typeof IcyGet)(url, function (res) {
             const getStaticData = () => {
                 const now = Date.now();
                 const imageName = name.replace(/\s/g, "-").toLowerCase();
@@ -47,7 +52,7 @@ const getMetadata = (name: string, url: string) =>
             };
 
             res.on("metadata", function (metadata) {
-                const parsed = icy.parse(metadata);
+                const parsed = (icy.parse as typeof IcyParse)(metadata);
                 const [artist, title] = parsed.StreamTitle.split(" - ");
 
                 const staticData = getStaticData();
@@ -132,12 +137,16 @@ export const getNowPlaying = async (
         };
     }
     if (channelName === ChannelName.SKY) {
+        // console.log("icy", icy);
+        // console.log("icy.get", icy.get);
+        // return;
         return getMetadata(
             "Sky Radio",
             "https://19993.live.streamtheworld.com/SKYRADIO.mp3"
         );
     }
     if (channelName === ChannelName.PINGUIN) {
+        // return;
         return getMetadata(
             "Pinguin Radio",
             "https://streams.pinguinradio.com/PinguinRadio320.mp3"

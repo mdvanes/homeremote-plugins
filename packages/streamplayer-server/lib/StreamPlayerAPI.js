@@ -49,7 +49,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 exports.__esModule = true;
 exports.getNowPlaying = exports.ChannelName = void 0;
 var got_1 = require("got");
-var icy_1 = require("icy");
+// Must use require or will break on build, because of ICY export method
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+var icy = require("icy");
 var ChannelName;
 (function (ChannelName) {
     ChannelName[ChannelName["RADIO2"] = 0] = "RADIO2";
@@ -59,7 +61,7 @@ var ChannelName;
 })(ChannelName = exports.ChannelName || (exports.ChannelName = {}));
 var getMetadata = function (name, url) {
     return new Promise(function (resolve) {
-        icy_1["default"].get(url, function (res) {
+        icy.get(url, function (res) {
             var getStaticData = function () {
                 var now = Date.now();
                 var imageName = name.replace(/\s/g, "-").toLowerCase();
@@ -71,7 +73,7 @@ var getMetadata = function (name, url) {
                 };
             };
             res.on("metadata", function (metadata) {
-                var parsed = icy_1["default"].parse(metadata);
+                var parsed = icy.parse(metadata);
                 var _a = parsed.StreamTitle.split(" - "), artist = _a[0], title = _a[1];
                 var staticData = getStaticData();
                 resolve(__assign(__assign({}, staticData), { title: title,
@@ -130,9 +132,13 @@ exports.getNowPlaying = function (channelName) { return __awaiter(void 0, void 0
                     }];
             case 6:
                 if (channelName === ChannelName.SKY) {
+                    // console.log("icy", icy);
+                    // console.log("icy.get", icy.get);
+                    // return;
                     return [2 /*return*/, getMetadata("Sky Radio", "https://19993.live.streamtheworld.com/SKYRADIO.mp3")];
                 }
                 if (channelName === ChannelName.PINGUIN) {
+                    // return;
                     return [2 /*return*/, getMetadata("Pinguin Radio", "https://streams.pinguinradio.com/PinguinRadio320.mp3")];
                 }
                 return [2 /*return*/];
