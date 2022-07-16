@@ -1,5 +1,5 @@
 interface Response {
-    headers: any;
+    headers: Record<string, string>;
     on: (eventType: string, then: (metadata: string) => void) => void;
 }
 
