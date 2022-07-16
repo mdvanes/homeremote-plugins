@@ -122,11 +122,11 @@ channels =
       }
     , { name = "Sky Radio"
       , streamUrl = "https://19993.live.streamtheworld.com/SKYRADIO.mp3"
-      , nowPlayingUrl = ""
+      , nowPlayingUrl = "/api/nowplaying/sky"
       }
     , { name = "Pinguin Radio"
       , streamUrl = "http://streams.pinguinradio.com/PinguinRadio320.mp3"
-      , nowPlayingUrl = ""
+      , nowPlayingUrl = "/api/nowplaying/pinguin"
       }
     ]
 
