@@ -19,7 +19,7 @@
     "suffix": ".bs.js",
     "reason": { "react-jsx": 3 },
     "bs-dev-dependencies": ["@glennsl/bs-jest"],
-    "bs-dependencies": ["@rescript/react", "bs-fetch", "@jsiebern/bs-material-ui"],
+    "bs-dependencies": ["@rescript/react", "bs-fetch", "rescript-material-ui"],
     "namespace": true,
     "gentypeconfig": {
         "language": "typescript"

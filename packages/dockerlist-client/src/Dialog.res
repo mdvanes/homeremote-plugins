@@ -13,10 +13,10 @@ let getDialog = (
   onClose: unit => unit,
   c: DockerUtil.selectedContainerType,
 ): React.element => {
-  open MaterialUi
+  open Mui
 
   switch c {
-  | NoContainer => <MaterialUi_Dialog aria_labelledby="dockerlist-dialog-title" _open={false} />
+  | NoContainer => <Mui.Dialog \"aria-labelledby"="dockerlist-dialog-title" \"open"={false}></Mui.Dialog>
   | DockerContainer(container) => {
       let state = container["State"]
       let isRunning = state == "running"
@@ -27,11 +27,11 @@ let getDialog = (
         ->Js.Array2.joinWith(" ")
       let questionPrefix = "Do you want to"
 
-      <MaterialUi_Dialog aria_labelledby="dockerlist-dialog-title" _open={true}>
+      <Mui.Dialog \"aria-labelledby"="dockerlist-dialog-title" \"open"={true}>
         <DialogTitle id="dockerlist-dialog-title">
           {`${name} (${state})`->React.string}
         </DialogTitle>
-        <MaterialUi_DialogContent>
+        <Mui.DialogContent>
           <Typography> {status->React.string} </Typography>
           <Typography>
             {if isRunning {
@@ -40,7 +40,7 @@ let getDialog = (
               `${questionPrefix} start ${name}?`
             }}
           </Typography>
-        </MaterialUi_DialogContent>
+        </Mui.DialogContent>
         <DialogActions>
           <Button color=#Secondary onClick={_ev => onClose()}> {"cancel"->React.string} </Button>
           <Button
@@ -54,7 +54,7 @@ let getDialog = (
             {"OK"->React.string}
           </Button>
         </DialogActions>
-      </MaterialUi_Dialog>
+      </Mui.Dialog>
     }
   }
 }

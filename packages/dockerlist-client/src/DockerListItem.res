@@ -14,7 +14,7 @@ module ErrorIcon = {
 
 @react.component
 let make = (~container: DockerUtil.dockerContainer, ~onSelect: DockerUtil.setSelectedContainer) => {
-  open MaterialUi
+  open Mui
   let id = container["Id"]
   // https://stackoverflow.com/a/32428199: created, restarting, running, paused, exited, dead
   let state = container["State"]

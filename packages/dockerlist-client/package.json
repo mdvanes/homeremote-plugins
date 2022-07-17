@@ -93,10 +93,10 @@
         "gentype": "^3.50.0"
     },
     "dependencies": {
-        "@jsiebern/bs-material-ui": "^2.1.0",
         "@rescript/react": "^0.10.3",
         "bs-fetch": "^0.6.2",
-        "rescript": "^9.1.2"
+        "rescript": "^9.1.2",
+        "rescript-material-ui": "^3.0.2"
     },
     "peerDependencies": {
         "@material-ui/core": "*",

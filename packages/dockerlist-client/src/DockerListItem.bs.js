@@ -3,9 +3,9 @@
 
 var Curry = require("rescript/lib/js/curry.js");
 var React = require("react");
+var Checkbox$Mui = require("rescript-material-ui/src/Checkbox.bs.js");
+var IconButton$Mui = require("rescript-material-ui/src/IconButton.bs.js");
 var Core = require("@material-ui/core");
-var MaterialUi_Checkbox = require("@jsiebern/bs-material-ui/src/MaterialUi_Checkbox.bs.js");
-var MaterialUi_IconButton = require("@jsiebern/bs-material-ui/src/MaterialUi_IconButton.bs.js");
 var DockerListModuleCss = require("./DockerList.module.css");
 var $$Error = require("@material-ui/icons/Error").default;
 
@@ -40,10 +40,10 @@ function DockerListItem(Props) {
                                     children: React.createElement($$Error, {
                                           color: "error"
                                         }),
-                                    edge: MaterialUi_IconButton.Edge.start
+                                    edge: IconButton$Mui.Edge.start
                                   })
                             }) : React.createElement(Core.Checkbox, {
-                              edge: MaterialUi_Checkbox.Edge.start,
+                              edge: Checkbox$Mui.Edge.start,
                               checked: isRunning,
                               inputProps: {
                                 "aria-labelledby": id
