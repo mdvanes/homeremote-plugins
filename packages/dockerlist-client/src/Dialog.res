@@ -42,9 +42,9 @@ let getDialog = (
           </Typography>
         </Mui.DialogContent>
         <DialogActions>
-          <Button color=#Secondary onClick={_ev => onClose()}> {"cancel"->React.string} </Button>
+          <Button color=#secondary onClick={_ev => onClose()}> {"cancel"->React.string} </Button>
           <Button
-            color=#Primary
+            color=#primary
             onClick={_ev => {
               let _ = toggleContainerState(container)->Js.Promise.then_(_containers => {
                 onClose()

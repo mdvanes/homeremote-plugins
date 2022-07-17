@@ -11,7 +11,7 @@ var styles = DockerListModuleCss;
 function getDialog(toggleContainerState, onClose, c) {
   if (!c) {
     return React.createElement(Core.Dialog, {
-                aria_labelledby: "dockerlist-dialog-title",
+                "aria-labelledby": "dockerlist-dialog-title",
                 open: false
               });
   }
@@ -24,7 +24,7 @@ function getDialog(toggleContainerState, onClose, c) {
         }).join(" ");
   var questionPrefix = "Do you want to";
   return React.createElement(Core.Dialog, {
-              aria_labelledby: "dockerlist-dialog-title",
+              "aria-labelledby": "dockerlist-dialog-title",
               children: null,
               open: true
             }, React.createElement(Core.DialogTitle, {

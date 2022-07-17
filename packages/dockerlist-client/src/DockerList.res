@@ -72,21 +72,21 @@ module DockerListMod = {
 
     let renderList = renderListCreator(setSelectedContainer)
 
-    let progressSpacer = <MaterialUi_Box height={MaterialUi_Box.Value.string("4px")} />
+    let progressSpacer = <Mui.Box height={Mui.Box.Value.string("4px")} />
 
     let progress = if isLoading {
-      <MaterialUi_LinearProgress />
+      <Mui.LinearProgress />
     } else {
       progressSpacer
     }
 
-    <MaterialUi_Grid container={true}>
-      <MaterialUi_Grid item={true} xs={MaterialUi_Grid.Xs._true}>
-        <MaterialUi_List> {progress} {containersFirstHalf->renderList} </MaterialUi_List>
-      </MaterialUi_Grid>
-      <MaterialUi_Grid item={true} xs={MaterialUi_Grid.Xs._true}>
-        <MaterialUi_List> {progressSpacer} {containersSecondHalf->renderList} </MaterialUi_List>
-      </MaterialUi_Grid>
+    <Mui.Grid container={true}>
+      <Mui.Grid item={true} xs={Mui.Grid.Xs.\"true"}>
+        <Mui.List> {progress} {containersFirstHalf->renderList} </Mui.List>
+      </Mui.Grid>
+      <Mui.Grid item={true} xs={Mui.Grid.Xs.\"true"}>
+        <Mui.List> {progressSpacer} {containersSecondHalf->renderList} </Mui.List>
+      </Mui.Grid>
       <Dialog
         container={selectedContainer}
         toggleContainerState={DockerApi.toggleContainerStateCreator(
@@ -97,6 +97,6 @@ module DockerListMod = {
         )}
         close={() => setSelectedContainer(_prev => DockerUtil.NoContainer)}
       />
-    </MaterialUi_Grid>
+    </Mui.Grid>
   }
 }
