@@ -35,9 +35,9 @@ let getDialog = (
           <Typography> {status->React.string} </Typography>
           <Typography>
             {if isRunning {
-              `${questionPrefix} stop ${name}?`
+              {`${questionPrefix} stop ${name}?`->React.string}
             } else {
-              `${questionPrefix} start ${name}?`
+              {`${questionPrefix} start ${name}?`->React.string}
             }}
           </Typography>
         </Mui.DialogContent>
