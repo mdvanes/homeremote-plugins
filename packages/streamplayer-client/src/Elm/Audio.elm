@@ -268,7 +268,9 @@ update msg model =
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    Sub.none
+    Sub.batch
+        [ Sub.map MsgControls (Elm.Controls.subscriptions model.controls)
+        ]
 
 
 

@@ -1,6 +1,6 @@
-module Elm.Controls exposing (Model, Msg(..), init, update, view)
+module Elm.Controls exposing (Model, Msg(..), init, update, view, subscriptions)
 
-import Elm.Ports exposing (setPlayPauseStatusPort)
+import Elm.Ports exposing (setPlayPauseStatusPort, messageReceiver)
 import Html exposing (Html, button, div, text)
 import Html.Events exposing (onClick)
 import Html.Attributes exposing (class, classList)
@@ -13,6 +13,7 @@ type alias Model =
 
 type Msg
     = SetPlayPauseStatus PlayPauseStatus
+    | SetPlayPauseStatusStr String
 
 
 type PlayPauseStatus
@@ -40,7 +41,20 @@ update msg model =
                 statusStr = (statusToString status)
             in
             ( { model | currentStatus = statusStr }, setPlayPauseStatusPort statusStr )
+        SetPlayPauseStatusStr statusStr ->
+            ( { model | currentStatus = statusStr }, setPlayPauseStatusPort statusStr )
 
+
+-- SUBSCRIPTIONS
+
+
+subscriptions : Model -> Sub Msg
+subscriptions model =
+    messageReceiver SetPlayPauseStatusStr
+
+
+
+-- VIEW
 
 view : Model -> Html Msg
 view model =
