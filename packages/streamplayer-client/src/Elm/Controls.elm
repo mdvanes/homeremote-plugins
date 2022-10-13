@@ -1,6 +1,6 @@
 module Elm.Controls exposing (Model, Msg(..), init, update, view, subscriptions)
 
-import Elm.Ports exposing (setPlayPauseStatusPort, messageReceiver)
+import Elm.Ports exposing (setPlayPauseStatusPort, receivePlayPauseStatusPort)
 import Html exposing (Html, button, div, text)
 import Html.Events exposing (onClick)
 import Html.Attributes exposing (class, classList)
@@ -50,7 +50,7 @@ update msg model =
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    messageReceiver SetPlayPauseStatusStr
+    receivePlayPauseStatusPort SetPlayPauseStatusStr
 
 
 

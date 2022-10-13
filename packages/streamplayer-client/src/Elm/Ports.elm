@@ -1,7 +1,7 @@
-port module Elm.Ports exposing (setPlayPauseStatusPort, messageReceiver)
+port module Elm.Ports exposing (setPlayPauseStatusPort, receivePlayPauseStatusPort)
 
 -- PORT
 
 
 port setPlayPauseStatusPort : String -> Cmd msg
-port messageReceiver : (String -> msg) -> Sub msg
+port receivePlayPauseStatusPort : (String -> msg) -> Sub msg
