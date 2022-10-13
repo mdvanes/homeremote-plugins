@@ -1,14 +1,15 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import "./StreamPlayer.css";
 import Elm from "react-elm-components";
 import Audio from "./Elm/Audio.elm";
 
+const getAudioElem = (containerRef) =>
+    containerRef.current.children[0].querySelector("audio");
+
 const setupPorts = (containerRef) => (ports) => {
     ports.setPlayPauseStatusPort.subscribe((newStatus) => {
         // NOTE: findDomNode has been deprecated
-        const audioElem = containerRef.current.children[0].querySelector(
-            "audio"
-        );
+        const audioElem = getAudioElem(containerRef);
         // Wait to let the audio elem be updated with a new cachebusting timestamp in Audio.elm `Cmd.batch [ Task.perform UpdateTimestamp Time.now, Cmd.map MsgControls controlsCmds ]`
         setTimeout(() => {
             if (newStatus === "Play") {
@@ -20,8 +21,19 @@ const setupPorts = (containerRef) => (ports) => {
     });
 };
 
-const StreamPlayer = ({ url }) => {
+const StreamPlayer = ({
+    url,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    setAudioElem = (_) => {
+        /* set default to make this prop optional in jsx */
+    },
+}) => {
     const containerRef = useRef(null);
+
+    useEffect(() => {
+        setAudioElem(getAudioElem(containerRef));
+    }, [setAudioElem]);
+
     return (
         <div ref={containerRef}>
             <Elm

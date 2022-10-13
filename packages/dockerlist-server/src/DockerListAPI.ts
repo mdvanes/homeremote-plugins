@@ -9,6 +9,10 @@ interface DockerContainerInfo {
 
 type AllResponse = DockerContainerInfo[];
 
+export interface DockerListArgs {
+    socketPath?: string;
+}
+
 export interface DockerListResponse {
     status: "received" | "error";
     containers?: DockerContainerInfo[];
@@ -25,10 +29,13 @@ const pickAndMapContainerProps = ({
 // These urls also work: http://localhost/v1.24/containers/json?all=true or v1.24/containers/json?all=true
 const ROOT_URL = "http://v1.41/containers";
 
-export const getDockerList = async (): Promise<DockerListResponse> => {
+export const getDockerList = async (
+    args?: DockerListArgs
+): Promise<DockerListResponse> => {
+    const { socketPath = "/var/run/docker.sock" } = args ?? {};
     try {
         const result = await got(`${ROOT_URL}/json?all=true`, {
-            socketPath: "/var/run/docker.sock",
+            socketPath,
         }).json<AllResponse>();
 
         return {

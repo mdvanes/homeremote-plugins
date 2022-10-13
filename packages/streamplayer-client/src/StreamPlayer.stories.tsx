@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import StreamPlayer from "./StreamPlayer";
 import packageJson from "../package.json";
-import { BreakpointWrapper } from "../../../helpers";
+import { AudioElemWrapper, BreakpointWrapper } from "../../../helpers";
 
 export default {
     title: `Elm/StreamPlayer v${packageJson.version}`,
@@ -10,14 +10,18 @@ export default {
 
 const url =
     process.env.STORYBOOK_MODE === "PROD"
-        ? `https://${window.location.host}/${window.top.location.pathname}`
+        ? `https://${window.location.host}/${
+              window.top?.location.pathname ?? ""
+          }`
         : "http://localhost:3100";
 
-export const Default = ({ width }: { width: number }): ReactNode => (
-    <BreakpointWrapper width={width}>
-        <StreamPlayer url={url} />
-    </BreakpointWrapper>
-);
+export const Default = ({ width }: { width: number }): ReactNode => {
+    return (
+        <BreakpointWrapper width={width}>
+            <AudioElemWrapper url={url} />
+        </BreakpointWrapper>
+    );
+};
 
 // See https://github.com/storybookjs/storybook/blob/next/addons/controls/README.md#knobs-to-manually-configured-args
 Default.args = { width: 600 };

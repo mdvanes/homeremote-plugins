@@ -45,28 +45,31 @@ var pickAndMapContainerProps = function (_a) {
 // Using Docker Engine API: curl --unix-socket /var/run/docker.sock http://v1.24/containers/json?all=true
 // These urls also work: http://localhost/v1.24/containers/json?all=true or v1.24/containers/json?all=true
 var ROOT_URL = "http://v1.41/containers";
-exports.getDockerList = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var result, err_1;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
+exports.getDockerList = function (args) { return __awaiter(void 0, void 0, void 0, function () {
+    var _a, socketPath, result, err_1;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
             case 0:
-                _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, got_1["default"](ROOT_URL + "/json?all=true", {
-                        socketPath: "/var/run/docker.sock"
-                    }).json()];
+                _a = (args !== null && args !== void 0 ? args : {}).socketPath, socketPath = _a === void 0 ? "/var/run/docker.sock" : _a;
+                _b.label = 1;
             case 1:
-                result = _a.sent();
+                _b.trys.push([1, 3, , 4]);
+                return [4 /*yield*/, got_1["default"](ROOT_URL + "/json?all=true", {
+                        socketPath: socketPath
+                    }).json()];
+            case 2:
+                result = _b.sent();
                 return [2 /*return*/, {
                         status: "received",
                         containers: result.map(pickAndMapContainerProps)
                     }];
-            case 2:
-                err_1 = _a.sent();
+            case 3:
+                err_1 = _b.sent();
                 console.error(err_1);
                 return [2 /*return*/, {
                         status: "error"
                     }];
-            case 3: return [2 /*return*/];
+            case 4: return [2 /*return*/];
         }
     });
 }); };

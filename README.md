@@ -36,6 +36,7 @@ lerna run start
 * start storybook & api: `yarn start`
     * alternatively: start storybook: `yarn storybook`
     * in another terminal, start the backend API for storybook: `yarn storybook:api`
+* storybook should run at http://localhost:6006
 
 ## Build Storybook
 
