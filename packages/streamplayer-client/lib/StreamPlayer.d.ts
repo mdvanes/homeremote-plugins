@@ -15,7 +15,7 @@ export interface Ports {
 
 export interface HomeremoteStreamPlayerProps {
     url: string;
-    setPorts: (ports: Ports) => void;
+    setPorts?: (ports: Ports) => void;
 }
 
 declare const HomeremoteStreamPlayer: FC<HomeremoteStreamPlayerProps>;

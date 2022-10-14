@@ -6,7 +6,7 @@ import {
 } from "../packages/streamplayer-client/lib/StreamPlayer";
 import StreamPlayer from "../packages/streamplayer-client/src/StreamPlayer";
 
-type AudioElemWrapperProps = HomeremoteStreamPlayerProps;
+type AudioElemWrapperProps = Omit<HomeremoteStreamPlayerProps, "setPorts">;
 
 const AudioElemWrapper: FC<AudioElemWrapperProps> = (props) => {
     const [isPlaying, setIsPlaying] = useState(false);
