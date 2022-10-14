@@ -25,11 +25,11 @@ elm-stuff
 repl-temp-*
 
 ### Rescript
-packages/dockerlist-client/.merlin
+/packages/dockerlist-client/.merlin
+/packages/dockerlist-client/.bsb.lock
+/packages/dockerlist-client/lib
 
 .idea
 
 /old
 /storybook-static
-
-/packages/dockerlist-client/lib
