@@ -24,6 +24,9 @@ elm-stuff
 # elm-repl generated files
 repl-temp-*
 
+### Rescript
+packages/dockerlist-client/.merlin
+
 .idea
 
 /old

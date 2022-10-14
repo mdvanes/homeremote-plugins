@@ -44,7 +44,7 @@ For Github Pages
 
 * `nvm use`
 * `yarn build-storybook`
-* PR to master
+* PR to main
 * visit https://mdworld.nl/homeremote-plugins/
 
 ## Add dependency to e.g. packages/streamplayer-client
